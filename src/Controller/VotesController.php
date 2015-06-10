@@ -26,7 +26,7 @@
 
 	class VotesController implements ControllerProviderInterface
 	{
-		//protected $_model;
+		protected $_model;
 
 		/**
 		 * Connection

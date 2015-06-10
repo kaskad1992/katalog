@@ -31,7 +31,7 @@
 				'host'      => 'localhost',
 				'dbname'    => '12_drapala',
 				'user'      => '12_drapala',
-				'password'  => 'W3p8r1j8w1',
+				'password'  => '',
 				'charset'   => 'utf8',
                 'driverOptions' => array(
                         1002=>'SET NAMES utf8'
@@ -68,8 +68,8 @@
 				),
 			),
 			'security.access_rules' => array(
-				array('^/auth/.+$|^/users/register.*$|^/books.*$|^/authors/.*$|^/search/.*$|^/categories.*$|^/publishers.*$|^/translators.*$|^/votes/.*$', 'IS_AUTHENTICATED_ANONYMOUSLY'),
-				//array('^/rates.*$|^/votes/.*$|^/users.*', 'ROLE_USER'),
+				array('^/auth/.+$|^/users/register.*$|^/books.*$|^/authors/.*$|^/search/.*$|^/categories.*$|^/publishers.*$|^/translators.*$', 'IS_AUTHENTICATED_ANONYMOUSLY'),
+				array('^/rates.*$|^/votes/.*$|^/users.*', 'ROLE_USER'),
 				array('^/.+$', 'ROLE_ADMIN')
 			),
 			'security.role_hierarchy' => array(
