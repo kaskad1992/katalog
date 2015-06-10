@@ -1,0 +1,64 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <h1>
+	    Lista wydawnictw:
+    </h1>
+{#	{% if is_granted('ROLE_ADMIN') %} #}
+	<h2>
+	    <hr>
+        <a href="{{ url('/publishers/add') }}" class="btn btn-default" title="Add Publisher">
+           Dodaj nowe wydawnictwo
+        </a>
+	</h2>
+{#	{% endif %} #}
+	<hr>
+    {% for flashMessage in app.session.getFlashBag.get('message') %}
+    <div class="alert alert-{{ flashMessage.type }}">
+        {{ flashMessage.content }}
+    </div>
+    {% endfor %}
+    {%  if publishers|length > 0 %}
+    	<table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nazwa</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for publisher in publishers %}
+                <tr>
+                    <td>{{ publisher.id|e }}</td>
+                    <td><a href="{{ url('/publishers/view',{'id': publisher.id}) }}" title="View publisher">{{ publisher.name|e }} </a></td>
+                    <td>
+{#					{% if is_granted('ROLE_ADMIN') %} #}
+					    <div class="text-right">
+					        <a href="{{ url('/publishers/edit',{'id': publisher.id}) }}" class="btn btn-default" title="Edit publisher">Edytuj dane wydawnictwa</a>
+					        <a href="{{ url('/publishers/delete',{'id': publisher.id}) }}" class="btn btn-default" title="Delete publisher">Usuń wydawnictwo</a>
+					    </div>
+					{#{% endif %} #}
+					</td>
+                </tr>
+            {% endfor %}
+		    </tbody>
+	    </table>
+{#        <div class="text-center">
+            {% if paginator.page > 1 %}
+                {% set previous = (paginator.page - 1) %}
+                <a href="{{ url('/publishers/controlpanel', {'page': previous}) }}" title="previous page"><img src="{{ app.request.basepath }}" alt="Previous" /></a>
+            {%  endif %}
+
+            {% if paginator.page < paginator.pagesCount %}
+               {% set next = (paginator.page + 1) %}
+               <a href="{{ url('/publishers/controlpanel', {'page': next}) }}" title="next page"><img src="{{ app.request.basepath }}" alt="Next" /></a>
+            {% endif  %}
+        </div>			#}
+	{% else %}
+        <p>
+            Brak wydawnictw.
+        </p>
+    {% endif %}
+	<hr>
+{% endblock %}

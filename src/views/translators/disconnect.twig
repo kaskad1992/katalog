@@ -1,0 +1,18 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <h2>
+        Usuń tłumacza książki ,,{{ book.title }}''
+    </h2>
+    <hr>
+    <div>
+        <h4>Czy na pewno chcesz usunąć tłumacza: {{ translator.name }} {{ translator.surname }}?</h4>
+        <form action="" method="post">
+            {{ form_widget(form) }}
+        </form>
+		<a href="{{ url('/translators/manage', {'idBook': book.id}) }}">
+		    < Lista tłumaczy
+		</a>
+    </div>
+
+{% endblock %}

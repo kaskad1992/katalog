@@ -1,0 +1,31 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<p>
+    <a href="{{ url('/translators/manage', {'idBook': book.id}) }}" class="btn btn-large" title="Add">
+        Tłumacze
+    </a>
+	<hr>
+    {% for flashMessage in app.session.getFlashBag.get('message') %}
+    <div class="alert alert-{{ flashMessage.type }}">
+        {{ flashMessage.content }}
+    </div>
+    {% endfor %}
+</p>
+<p>
+    {% if translators|length > 0 %}
+    {% for translator in translators %}
+        <p class>
+            <a href="{{ url('/translators/edit', {'id': translator.id}) }}" class="btn btn-default" title="Edit">Edytuj</a>
+            <a href="{{ url('/translators/delete', {'id': translator.id}) }}" class="btn btn-default" title="Delete">Usuń</a>
+			<a href="{{ url('/translators/view', {'id': translator.id}) }}">{{ translator.name|e }} {{ translator.surname|e }} </a>
+
+        </p>        
+    {% endfor %}
+	{% else %}
+	    <p>Wybrana książka nie ma przypisanego tłumacza.</p>
+	{% endif %}
+	<hr>
+</p>
+
+{% endblock %}

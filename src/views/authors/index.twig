@@ -1,0 +1,70 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <h1>
+        Lista autorów:
+    </h1> 
+	<hr>
+	<br>
+{#  {% if is_granted('ROLE_ADMIN') %} #}
+	<h2>
+	    <hr>
+        <a href="{{ url('/authors/add') }}" class="btn btn-default" title="Add author">
+            Dodaj nowego autora
+        </a>
+    </h2>
+{#	{% endif %} 
+	<hr>
+    {% for flashMessage in app.session.getFlashBag.get('message') %}
+    <div class="alert alert-{{ flashMessage.type }}">
+        {{ flashMessage.content }}
+    </div>
+    {% endfor %} #}
+	
+	{%  if authors|length > 0 %} 
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Imię</th>
+					<th>Nazwisko</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for author in authors %}
+                <tr>
+                    <td>{{ author.id|e }}</td>
+					<td>{{ author.name|e }}</td>
+					<td>
+					    <a href="{{ url('/authors/view', {'id': author.id}) }}" title="View author">{{ author.surname|e }}</a>
+					</td>
+                    <td><div class="text-right">
+					{# {% if is_granted('ROLE_ADMIN') %} #}
+                        <a href="{{ url('/authors/edit', {'id': author.id}) }}" title="Edit author" class="btn btn-default">Edytuj dane autora</a>
+                        <a href="{{ url('/authors/delete', {'id': author.id}) }}" title="Delete author" class="btn btn-default">Usuń autora</a>
+                    {# {% endif %} #}  </div></td> 
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+{#        <div class="text-center">
+            {% if paginator.page > 1 %}
+                {% set previous = (paginator.page - 1) %}
+                <a href="{{ url('/categories/', {'page': previous}) }}" title="previous page"><img src="{{ app.request.basepath }}" alt="Previous" /></a>
+            {%  endif %}
+
+            {% if paginator.page < paginator.pagesCount %}
+               {% set next = (paginator.page + 1) %}
+               <a href="{{ url('/categories/', {'page': next}) }}" title="next page"><img src="{{ app.request.basepath }}" alt="Next" /></a>
+            {% endif  %}
+        </div>		#}
+    {% else %} 
+        <p>
+            Nie znaleziono autorów.
+        </p>
+    {% endif %} 
+	<hr>
+	
+{% endblock %}

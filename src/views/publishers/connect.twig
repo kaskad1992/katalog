@@ -1,0 +1,23 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<h2>
+    Wybierz, kto wyda³ ksi¹¿kê ,,{{ book.title }}'':
+</h2>
+<hr>
+
+<form action="" method="post">
+    {{ form_widget(form) }}
+</form>
+<hr>
+<p>Jeœli wydawnictwa nie ma na liœcie, dodaj je do bazy.</p>
+<a href="{{ url('/publishers/add') }}" title="Add">
+    <button type="button" class="btn btn-default">Dodaj nowe wydawnictwo</button>
+</a>	
+
+<hr>
+<a href="{{ url('/publishers/manage', {'idBook': book.id}) }}" title="Manage publishers">
+    < Lista wydawnictw
+</a>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <h2>
+        Usuñ wydawnictwo ksi¹¿ki ,,{{ book.title }}''
+    </h2>
+    <hr>
+    <div>
+        <h4>Czy na pewno chcesz usun¹æ wydawnictwo: {{ publisher.name }} ?</h4>
+        <form action="" method="post">
+            {{ form_widget(form) }}
+        </form>
+		<a href="{{ url('/publishers/manage', {'idBook': book.id}) }}">
+		    < Lista wydawnictw
+		</a>
+    </div>
+
+{% endblock %}

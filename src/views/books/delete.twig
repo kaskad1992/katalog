@@ -1,0 +1,18 @@
+{% extends 'base.twig' %}
+ 
+{% block content %}
+    <h2>
+        Usuwanie książki z katalogu
+    </h2>
+	<hr>
+    <h4>Czy na pewno chcesz usunąć książkę: ,,{{ book.title }}''?</h4>
+    <form action="{{ url('/books/delete', {'id': book.id}) }}" method="post">
+        {{ form_widget(form) }}
+    </form>
+    <p>
+        <a href="{{ url('/books/') }}" title="Lista książek">
+            < Lista książek
+        </a>
+    </p>
+{% endblock %}
+  

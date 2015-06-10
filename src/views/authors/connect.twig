@@ -1,0 +1,23 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<h2>
+    Wybierz autora książki ,,{{ book.title }}'':
+</h2>
+<hr>
+
+<form action="" method="post">
+    {{ form_widget(form) }}
+</form>
+<hr>
+<p>Jeśli autora nie ma na liście, dodaj go do bazy.</p>
+<a href="{{ url('/authors/add') }}" title="Add">
+    <button type="button" class="btn btn-default">Dodaj nowego autora</button>
+</a>	
+
+<hr>
+<a href="{{ url('/authors/manage', {'id': book.id}) }}" title="Manage authors">
+    < Lista autorów
+</a>
+
+{% endblock %}

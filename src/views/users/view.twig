@@ -1,0 +1,27 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<h2>Czytelnik: {{ users_data.name }} {{ users_data.surname }}, {{ user.login }}</h2>
+<hr>
+{% for flashMessage in app.session.getFlashBag.get('message') %}
+    <div class="alert alert-{{ flashMessage.type }}">
+        {{ flashMessage.content }}
+    </div>
+{% endfor %}
+
+{% if is_granted('ROLE_USER') %}{% if currentuser == user.id or is_granted('ROLE_ADMIN') %}
+    {#<a href="{{ url('/users/editpassword', {'id': user.id}) }}" tile="Edit password" class="btn btn-default">Zmień hasło</a>#}
+    <a href="{{ url('/users/edit', {'id': user.id}) }}" tile="Edit user" class="btn btn-default">Edytuj dane</a>
+{% endif %}{% endif %}
+{% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ url('/users/delete', {'id': user.id}) }}" title="Delete user" class="btn btn-default">Usuń konto</a>
+{% endif %}
+<hr>
+
+
+        <p>
+            Nie znaleziono.
+        </p>
+    {% endif %}
+<hr>
+{% endblock %}

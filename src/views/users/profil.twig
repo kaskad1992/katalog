@@ -1,0 +1,30 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    {% for flashMessage in app.session.getFlashBag.get('message') %}
+        <div class="alert alert-{{ flashMessage.type }}">
+            {{ flashMessage.content }}
+        </div>
+    {% endfor %}   
+    <h2>
+        Profil użytkownika {{ user.login }}
+    <h2>
+    <hr>
+    <div>
+        <h4>Dane użytkownika:</h4>
+        <p><strong>Login:</strong> {{ user.login }}</p>
+        <p><strong>E-mail:</strong> {{ users_data.email }}</p>
+
+        {% if is_granted('ROLE_USER') %}
+            {% if currentuser == user.id or is_granted('ROLE_ADMIN') %}
+                {#<p><a href="{{ url('/users/edit', {'id': user.id}) }}">zmień hasło</a></p>#}
+            {% endif %}
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ url('/users/delete', {'id': user.id}) }}" title="Delete user">Usuń konto</a>
+        {% endif %}
+    </div>
+
+
+{% endblock %} 

@@ -1,0 +1,64 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+        <h2>
+            {{ book.title|e }} ( {{ book.original_title|e }} )
+            <hr>
+        </h2>
+		{% for flashMessage in app.session.getFlashBag.get('message') %}
+            <div class="alert alert-{{ flashMessage.type }}">
+            {{ flashMessage.content }}
+            </div>
+        {% endfor %}
+{#		{% if is_granted('ROLE_ADMIN') %} #}
+        <p class="paneladmin">
+            <a href="{{ url('/books/edit', {'id': book.id}) }}" class="btn btn-default" title="Edit book">Edytuj książkę</a>
+            <a href="{{ url('/books/delete', {'id': book.id}) }}" class="btn btn-default" title="Delete book">Usuń książkę</a>
+        </p>
+{#		{% endif %} #}
+		<hr>
+
+{#		<h5>Autor:</h5>
+		<p>
+		{# {% if authors|length > 0 %}
+            {% for author in authors %}
+                <a href="{{ url('/authors/view', {'idauthor': author.id}) }}">{{ author.name }} {{ author.surname }}   </a>
+            {% endfor %}
+		{% else %}Brak {% endif %} #}
+{#	    {% if is_granted('ROLE_ADMIN') %}<p><a href="{{ url('/authors/manage', {'idbook': book.id}) }}" class="btn btn-default" title="Manage authors">Edytuj autora</a></p>{% endif %} #}
+		{# </p>
+		<h5>Tłumaczenie:</h5>
+		<p>
+		{# {% if translators|length > 0 %}
+            {% for translator in translators %}
+                <a href="{{ url('/translators/view', {'idtranslator': translator.id}) }}">{{ translator.name }} {{ translator.surname }}   </a>
+            {% endfor %}
+		{% else %}Brak {% endif %} #}
+{#	    {% if is_granted('ROLE_ADMIN') %}<p><a href="{{ url('/translators/manage', {'idbook': book.id}) }}" class="btn btn-default" title="Manage translators">Edytuj tłumacza</a></p>{% endif %} #}
+		{# </p>
+		<h5>Wydawnictwo:</h5>
+		<p>
+		{# {% if publishers|length > 0 %}
+            {% for publisher in publishers %}
+                <a href="{{ url('/publishers/view', {'idpublisher': publisher.id}) }}">{{ publisher.name }} </a>
+            {% endfor %}
+		{% else %}Brak {% endif %} #}
+{#	    {% if is_granted('ROLE_ADMIN') %}<p><a href="{{ url('/publishers/manage', {'idbook': book.id}) }}" class="btn btn-default" title="Manage publishers">Edytuj wydawnictwo</a></p>{% endif %} #}
+		</p> 
+		<hr>
+		<p><strong>Autor:</strong> {{ book.idAuthor|e }} </p>
+		<p><strong>Tłumaczenie:</strong> {{ book.idTranslator|e }} </p>
+		<p><strong>Miejsce wydania</strong> {{ book.place|e }} </p>
+		<p><strong>Wydawnictwo</strong> {{ book.idPublisher|e }} </p>
+		<p><strong>Data</strong> {{ book.published|e }} </p>
+		<p><strong>ISBN</strong> {{ book.ISBN|e }} </p>
+		<p><strong>Kategoria:</strong> {{ book.idCategory|e }} </p> 
+		
+	<hr>
+	<p>
+        <a href="{{ url('/books/') }}" title="Books">
+            < Lista książek
+        </a>
+    </p>
+	
+{% endblock %}

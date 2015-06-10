@@ -1,0 +1,21 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <h2>
+        Edycja kategorii
+    </h2>
+	<hr>
+    {% for flashMessage in app.session.getFlashBag.get('message') %}
+    <div class="alert alert-{{ flashMessage.type }}">
+        {{ flashMessage.content }}
+    </div>
+    {% endfor %}
+    <form action="" method="post">
+        {{ form_widget(form) }}
+    </form>
+	<p>
+        <a href="{{ url('/categories/') }}" title="Categories">
+            < Lista kategorii
+        </a>
+    </p>
+{% endblock %}

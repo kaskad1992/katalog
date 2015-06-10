@@ -1,0 +1,70 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <h1>
+        Lista książek:
+    </h1>
+    <hr>
+    {% for flashMessage in app.session.getFlashBag.get('message') %}
+    <div class="alert alert-{{ flashMessage.type }}">
+        {{ flashMessage.content }}
+    </div>
+    {% endfor %}
+{#	{% if is_granted('ROLE_ADMIN') %} #}
+	<h2>
+        <a href="{{ url('/books/add') }}" class="btn btn-default" title="Add book">
+            Dodaj nową książkę
+        </a>
+    </h2> 
+{#	{% endif %} #}
+   
+     {% if books|length > 0 %} 
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Tytuł</th>
+					<th>Tytuł oryginalny</th>
+				{#	<th>Autor</th>
+					<th>Tłumaczenie</th>
+					<th>Wydawnictwo</th> #}
+	          {#  <th>{% if is_granted('ROLE_ADMIN') %}Autorzy{% endif %}</th> #}
+                    <th colspan="3">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.id|e }}</td>
+                    <td><a href="{{ url('/books/view', {'id': book.id}) }}" title="View book">{{ book.title|e }}</a></td>
+                    <td>{{ book.original_title|e }}</td>
+				{#	<td>{{ book.idAuthor|e }}</td>
+					<td>{{ book.idTranslator|e }}</td>
+					<td>{{ book.idPublisher|e }}</td> #}
+		{#			<td>{% if is_granted('ROLE_ADMIN') %}<a href="{{ url('/authors/manage', {'id': book.id}) }}" title="">Zobacz</a>{% endif %}</td> #}
+        {# 			<td>{% if is_granted('ROLE_ADMIN') %}<a href="{{ url('/books/edit', {'id': book.id}) }}" title="Edit book">Edytuj</a>{% endif %}</td> #}
+        {# 			<td>{% if is_granted('ROLE_ADMIN') %}<a href="{{ url('/books/delete', {'id': book.id}) }}" title="Delete book">Usuń</a>{% endif %}</td> #}
+               </tr>
+            {% endfor %} 
+            </tbody>
+        </table>
+        {# <div class="text">
+            {% if paginator.page > 1 %}
+                {% set previous = (paginator.page - 1) %}
+                <a href="{{ url('/books/', {'page': previous}) }}" title="previous page"><img src="{{ app.request.basepath }}" alt="Previous" /></a>
+            {%  endif %}
+
+            {% if paginator.page < paginator.pagesCount %}
+               {% set next = (paginator.page + 1) %}
+               <a href="{{ url('/books/', {'page': next}) }}" title="next page"><img src="{{ app.request.basepath }}" alt="Next" /></a>
+            {% endif  %}
+        </div> #}
+     {% else %} 
+        <p>
+            Nie znaleziono książek :(
+        </p>
+     {% endif %} 
+	<hr>
+	
+	
+{% endblock %}

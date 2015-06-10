@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+            <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="{{ app.request.basepath }}/fx/style.css" rel="stylesheet" media="screen">
+			
+			<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+			 
+            <script src="http://code.jquery.com/jquery.js"></script>
+			
+			<i class="fa fa-book"></i>
+			<title>*Katalog książek*</title>
+        {% endblock %}
+    </head>
+	
+    <body>
+		<div id="wrapper">
+			<div id="login">
+	{#			{% if is_granted('IS_AUTHENTICATED_FULLY') %} #}
+	{#					{% if is_granted('ROLE_ADMIN') %}{% else %}<li><a href="{{ url('/users/') }}"><h2>Mój profil</h2></a></li>{% endif %} #}
+	{#					<li><a href="{{ url('/auth/logout') }}"><h2>Wyloguj się<h2></a></li> #}
+	{#			{% else %} #}
+						<li><a href="{{ url('/auth/login') }}"><h2>Zaloguj się</h2></a></li> 
+						<li><a href="{{ url('/users/register') }}" title="register"><h2>Rejestracja</h2></a></li> 
+	{#			{% endif %} #}
+			</div>
+			<div id="head">
+				<div id="logo">
+					<a href="http://wierzba.wzks.uj.edu.pl/~12_drapala/silex/web/books"><h1>Katalog Książek<h1></a>
+					<h2>Internetowy</h2>
+				</div>
+				
+				{% block navigation %}{% include 'menu.twig' %}{% endblock %}
+			</div>
+			<div id="page">
+				<div id="page-bgtop">			
+					<div id="content">
+						{% block content %}{% endblock %}
+							<div class="post">
+								<p class="byline"><i>"Czytanie książek to najpiękniejsza zabawa, jaką sobie ludzkość wymyśliła."</i> <br>
+								- Wisława Szymborska</p>
+								<div class="entry">
+									<p><img src="/~12_drapala/silex/web/fx/images/img06.jpg" alt="" /></p>
+								</div>
+							</div>
+					</div>
+					<div id="sidebar">
+						<ul>
+							<li id="search"></li>
+						</ul>
+						<div id="menu">
+							<h2>Menu</h2>
+							<ul id="menu">
+								<li><a href="{{ url('/books/') }}" title="Books">Książki</a></li>
+								<li><a href="{{ url('/categories/') }}" title="Categories">Kategorie</a></li> 
+								<li><a href="{{ url('/authors/') }}" title="Authors">Autorzy</a></li>   
+								<li><a href="{{ url('/translators/') }}" title="Translators">Tłumaczenie</a></li> 
+								<li><a href="{{ url('/publishers/') }}" title="Publishers">Wydawnictwa</a></li> 
+
+					{#			{% if is_granted('ROLE_ADMIN') %} #}
+								<li><a href="{{ url('/votes/') }}" title="Votes">Głosy</a></li> 
+								<li><a href="{{ url('/users/') }}" title="Users">Konta czytelników</a></li> 
+					{#			{% endif %} #}
+							</ul>			
+							<br/>
+						</div>
+		
+					</div>
+					<div style="clear: both; height: 1px"></div>
+				</div>
+			
+		</div>
+		
+		{% block footer %}{% include 'footer.twig' %}{% endblock %}

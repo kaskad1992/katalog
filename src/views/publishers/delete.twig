@@ -1,0 +1,20 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <h2>
+        Usuwanie wydawnictwa
+    </h2>
+    <hr>
+    <div>
+        <h4>Czy na pewno chcesz usunąć wydawnictwo: {{ publisher.name }} ?</h4>
+        <form action="" method="post">
+            {{ form_widget(form) }}
+        </form>
+    </div>
+    <p>
+        <a href="{{ url('/publishers/controlpanel') }}" title="Lista wydawnictw">
+            < Lista wydawnictw
+        </a>
+    </p>
+
+{% endblock %}

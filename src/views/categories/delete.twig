@@ -1,0 +1,17 @@
+{% extends 'base.twig' %}
+ 
+{% block content %}
+    <h2>
+        Usuwanie kategorii
+    </h2>
+	<hr>
+    <h4>Czy na pewno chcesz usunąć kategorię: "{{ category.name }}"?</h4>
+    <form action="{{ url('/categories/delete', {'id': category.id}) }}" method="post">
+        {{ form_widget(form) }}
+    </form>
+    <p>
+        <a href="{{ url('/categories/') }}" title="Categories">
+            < Lista kategorii
+        </a>
+    </p>
+{% endblock %}

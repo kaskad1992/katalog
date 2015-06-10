@@ -1,0 +1,47 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <h2>
+        {{ category.name|e }}
+        <hr>
+    </h2>
+{#    {% if is_granted('ROLE_ADMIN') %} #}
+	<div class="paneladmin">
+            <a href="{{ url('/categories/edit', {'id': category.id}) }}" class="btn btn-default" title="Edit category">Edytuj kategorię</a>
+            <a href="{{ url('/categories/delete', {'id': category.id}) }}" class="btn btn-default" title="Delete category">Usuń kategorię</a>
+    </div>
+{#	{% endif %} #}
+	<hr>
+    {% for flashMessage in app.session.getFlashBag.get('message') %}
+    <div class="alert alert-{{ flashMessage.type }}">
+        {{ flashMessage.content }}
+    </div>
+    {% endfor %}
+	
+	<p><strong>Lista książek w tej kategorii:</strong></p>
+	{% if books|length > 0 %}
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Tytuł</th>
+					<div class="text-right"><th></th></div>
+                </tr>
+            </thead>
+            <tbody>
+            {% for book in books %}
+                <tr>
+                    <td><a href="{{ url('/books/view', {'id': book.id}) }}" title="View book">{{ book.title|e }}</a></td>
+                </tr>
+            {% endfor %}
+	        </tbody>
+        </table>
+    {% else %}
+        <p>Nie znaleziono. </p>
+    {% endif %}
+		
+	<p>
+        <a href="{{ url('/categories/') }}" title="Categories">
+            < Wróć do listy kategorii
+        </a>
+    </p>
+{% endblock %} 

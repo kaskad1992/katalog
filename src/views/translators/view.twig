@@ -1,0 +1,47 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+<h2>
+    {{ translator.name|e }} {{ translator.surname|e }}
+    <hr>
+</h2>
+{# {% if is_granted('ROLE_ADMIN') %}
+	<p class="paneladmin">
+        <a href="{{ url('/translators/edit', {'id': translator.id}) }}" class="btn btn-default" title="Edit translator">Edytuj dane tłumacza</a>
+        <a href="{{ url('/translators/delete', {'id': translator.id}) }}" class="btn btn-default" title="Delete translator">Usuń tłumacza</a>
+    </p>
+	<hr>
+{% endif %} #}
+
+{% for flashMessage in app.session.getFlashBag.get('message') %}
+    <div class="alert alert-{{ flashMessage.type }}">
+        {{ flashMessage.content }}
+    </div>
+{% endfor %}
+
+<p><strong>Książki przełożone przez tego tłumacza:</strong></p>
+{% if books|length > 0 %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Tytuł</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td><a href="{{ url('/books/view', {'id': book.id}) }}" title="View book">{{ book.title|e }}</a></td>
+            </tr>
+        {% endfor %}
+	    </tbody>
+    </table>
+{% else %}
+        <p>Brak</p>
+		<a href="{{ url('/books/') }}" title="View books"><Lista książek</a>
+{% endif %}
+<hr>
+<p>
+    <a href="{{ url('/translators/controlpanel') }}" title="Lista tłumaczy"><Lista tłumaczy</a>
+</p>
+{% endblock %}

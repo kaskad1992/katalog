@@ -1,0 +1,49 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+	<h2>
+		{{ publisher.name|e }} 
+		<hr>
+	</h2>
+{# {% if is_granted('ROLE_ADMIN') %} #}
+	<p class="paneladmin">
+        <a href="{{ url('/publishers/edit', {'id': publisher.id}) }}" class="btn btn-default" title="Edit publisher">Edytuj dane wydawnictwa</a>
+        <a href="{{ url('/publishers/delete', {'id': publisher.id}) }}" class="btn btn-default" title="Delete publisher">Usuń wydawnictwo</a>
+    </p>
+	<hr>
+{# {% endif %} #}
+
+{% for flashMessage in app.session.getFlashBag.get('message') %}
+    <div class="alert alert-{{ flashMessage.type }}">
+        {{ flashMessage.content }}
+    </div>
+{% endfor %}
+
+<p><strong>Książki wydane przez to wydawnictwo:</strong></p>
+{% if books|length > 0 %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Tytuł</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td><a href="{{ url('/books/view', {'id': book.id}) }}" title="View book">{{ book.title|e }}</a></td>
+            </tr>
+        {% endfor %}
+	    </tbody>
+    </table>
+{% else %}
+        <p>Brak</p>
+		<a href="{{ url('/books/') }}" title="View books">< Lista książek</a>
+{% endif %}
+<hr>
+<p>
+    <a href="{{ url('/publishers/') }}" title="Lista wydawnictw">
+	< Lista wydawnictw</a>
+</p>
+
+{% endblock %}

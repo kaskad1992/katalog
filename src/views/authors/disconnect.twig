@@ -1,0 +1,18 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <h2>
+        Usuń autora książki ,,{{ book.title }}''
+    </h2>
+    <hr>
+    <div>
+        <h4>Czy na pewno chcesz usunąć autora: {{ author.name }} {{ author.surname }}?</h4>
+        <form action="" method="post">
+            {{ form_widget(form) }}
+        </form>
+		<a href="{{ url('/authors/manage', {'id': book.id}) }}">
+		    < Lista autorów 
+		</a>
+    </div>
+
+{% endblock %}

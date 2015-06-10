@@ -1,0 +1,40 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<h2>
+    Lista tłumaczy książki ,,{{ book.title }}'':
+</h2>
+<hr>
+{% for flashMessage in app.session.getFlashBag.get('message') %}
+    <div class="alert alert-{{ flashMessage.type }}">
+        {{ flashMessage.content }}
+    </div>
+{% endfor %}
+{% if translators|length > 0 %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Imię i nazwisko</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for translator in translators %}
+            <tr>
+                <td>{{ translator.name|e }} {{ translator.surname|e }}</td>
+{#                <td><div class="text-right">{% if is_granted('ROLE_ADMIN') %}
+					<a href="{{ url('/translators/disconnect', {'idBook': id, 'id': translator.id}) }}" class="btn btn-default" title="Delete">Usuń tego tłumacza dla tej książki.</a>
+				{% endif %}</div></td> #}
+            </tr>
+        {% endfor %}
+	    </tbody>
+    </table>
+    {% if is_granted('ROLE_ADMIN') %}<a href="{{ url('/translators/connect', {'idBook': idBook}) }}" class="btn btn-default" title="Add">Dodaj tłumacza dla tej książki.</a>{% endif %}
+{% else %}
+        <p>Brak tłumaczy. </p>
+		<a href="{{ url('/translators/connect', {'idBook': idBook}) }}" class="btn btn-default" title="Add">Dodaj tłumacza dla tej książki.</a>
+
+{% endif %}
+<hr>
+<a href="{{ url('/books/view', {'id': book.id}) }}">< Powrót</a>
+{% endblock %}

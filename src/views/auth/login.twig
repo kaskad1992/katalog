@@ -1,0 +1,19 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <h1>
+        Logowanie
+    </h1>
+	<hr/>
+    {% for flashMessage in app.session.getFlashBag.get('message') %}
+    <div class="alert alert-{{ flashMessage.type }}">
+        {{ flashMessage.content }}
+    </div>
+    {% endfor %}
+        <div>
+            <form role="form" action="{{ path('books_login_check') }}" method="post">
+			    {{ error }}
+                {{ form_widget(form) }}
+            </form>
+        </div>
+{% endblock %} 

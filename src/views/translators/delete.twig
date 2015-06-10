@@ -1,0 +1,20 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <h2>
+        Usuwanie tłumacza
+    </h2>
+    <hr>
+    <div>
+        <h4>Czy na pewno chcesz usunąć tłumacza: {{ translator.name }} {{ translator.surname }}?</h4>
+        <form action="" method="post">
+            {{ form_widget(form) }}
+        </form>
+    </div>
+    <p>
+        <a href="{{ url('/translators/controlpanel') }}" title="Lista tłumaczy">
+            < Lista tłumaczy
+        </a>
+    </p>
+
+{% endblock %}

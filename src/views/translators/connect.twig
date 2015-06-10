@@ -1,0 +1,23 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<h2>
+    Wybierz, kto przetłumaczył książkę ,,{{ book.title }}'':
+</h2>
+<hr>
+
+<form action="" method="post">
+    {{ form_widget(form) }}
+</form>
+<hr>
+<p>Jeśli tłumacza nie ma na liście, dodaj go do bazy.</p>
+<a href="{{ url('/translators/add') }}" title="Add">
+    <button type="button" class="btn btn-default">Dodaj nowego tłumacza</button>
+</a>	
+
+<hr>
+<a href="{{ url('/translators/manage', {'idBook': book.id}) }}" title="Manage translators">
+    < Lista tłumaczy
+</a>
+
+{% endblock %}

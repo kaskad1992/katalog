@@ -1,0 +1,18 @@
+﻿{% block navigation %}
+    <div id="navigation">
+	    
+        <ul id="navigation">
+            <li><a href="{{ url('/books/') }}" title="Books">Książki</a></li>
+            <li><a href="{{ url('/categories/') }}" title="Categories">Kategorie</a></li> 
+			<li><a href="{{ url('/authors/') }}" title="Authors">Autorzy</a></li>   
+{#			<li><a href="{{ url('/translators/') }}" title="Translators">Tłumaczenie</a></li> #}
+{#			<li><a href="{{ url('/publishers/') }}" title="Publishers">Wydawnictwa</a></li> #}
+{#			<li><a href="{{ url('/votes/') }}" title="Votes">Głosy</a></li> #}
+{#			{% if is_granted('ROLE_ADMIN') %} #}
+			<li><a href="{{ url('/users/') }}" title="Users">Konta czytelników</a></li> 
+{#			{% endif %} #}
+		</ul>			
+		<br/>
+        		
+    </div>
+{% endblock %}

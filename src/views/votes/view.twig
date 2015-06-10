@@ -1,0 +1,31 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+        <h2>
+            {#{{ book.title|e }} #}
+            <hr>
+        </h2>
+		{% for flashMessage in app.session.getFlashBag.get('message') %}
+            <div class="alert alert-{{ flashMessage.type }}">
+            {{ flashMessage.content }}
+            </div>
+        {% endfor %}
+{#		{% if is_granted('ROLE_ADMIN') %} 
+        <p class="paneladmin">
+            <a href="{{ url('/books/edit', {'id': book.id}) }}" class="btn btn-default" title="Edit book">Edytuj książkę</a>
+            <a href="{{ url('/books/delete', {'id': book.id}) }}" class="btn btn-default" title="Delete book">Usuń książkę</a>
+        </p>
+		{% endif %} #}
+		<hr>
+
+        <hr>
+
+		<h5>Średnia ocena:</h5>
+		<p>
+		{% if votes|length > 0 %}
+            {% for vote in votes %}
+                <a href="{{ url('/votes/view', {'id': vote.id}) }}">{{ vote.id }} </a>
+            {% endfor %}
+		{% else %}Brak oceny{% endif %} #}
+		<hr>
+{% endblock %}

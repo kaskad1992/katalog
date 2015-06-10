@@ -1,0 +1,74 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    {% if is_granted('ROLE_ADMIN') %} 
+    <h1>
+        Konta użytkowników:
+    </h1> 
+	<h2>
+	    <hr>
+        <a href="{{ url('/users/register') }}" class="btn btn-default" title="Add">
+            Dodaj nowe konto użytkownika
+        </a>
+		<hr>
+    </h2>
+{#	{% endif %} #}
+	
+    {% for flashMessage in app.session.getFlashBag.get('message') %}
+    <div class="alert alert-{{ flashMessage.type }}">
+        {{ flashMessage.content }}
+    </div>
+    {% endfor %}
+	
+	{%  if users|length > 0 %}
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Login</th>
+                    <th>Imię i nazwisko</th>
+					<th>Email</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+			{% if is_granted('ROLE_USER') %}{% if currentuser == user.id or is_granted('ROLE_ADMIN') %} 
+                <tr>
+                    <td><a href="{{ url('/users/view', {'id': user.id}) }}" title="View user">{{ user.login|e }}</a></td>
+                    <td>{{ users_data.name|e }} {{ users_data.surname|e }}</td>
+					<td>{{ users_data.email }}</td>
+                    <td>
+						<div class="text-right">
+						    <a href="{{ url('/users/view', {'id': user.id}) }}" title="View user" class="btn btn-default">Zobacz</a>
+                            <a href="{{ url('/users/edit', {'id': user.id}) }}" title="Edit user" class="btn btn-default">Edytuj dane</a>
+						    {#<a href="{{ url('/users/editpassword', {'id': user.id}) }}" title="Change password" class="btn btn-default">Zmień hasło</a>#}
+                            {% if is_granted('ROLE_ADMIN') %}
+							    <a href="{{ url('/users/delete', {'id': user.id}) }}" title="Delete user" class="btn btn-default">Usuń konto</a>
+							{% endif %} 
+                        </div>
+						
+					</td>
+                </tr>
+			{% endif %}{% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+        {#<div class="text-center">
+            {% if paginator.page > 1 %}
+                {% set previous = (paginator.page - 1) %}
+                <a href="{{ url('/users/', {'page': previous}) }}" title="previous page"><img src="{{ app.request.basepath }}" alt="Previous" /></a>
+            {%  endif %}
+
+            {% if paginator.page < paginator.pagesCount %}
+               {% set next = (paginator.page + 1) %}
+               <a href="{{ url('/users/', {'page': next}) }}" title="next page"><img src="{{ app.request.basepath }}" alt="Next" /></a>
+            {% endif  %}
+        </div>		#}
+    {% else %}
+        <p>
+            Brak użytkowników.
+        </p>
+    {% endif %}
+	<hr>
+	
+{% endblock %}

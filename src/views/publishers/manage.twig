@@ -1,0 +1,40 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<h2>
+    Wydawnictwo ksi¹¿ki ,,{{ book.title }}'':
+</h2>
+<hr>
+{% for flashMessage in app.session.getFlashBag.get('message') %}
+    <div class="alert alert-{{ flashMessage.type }}">
+        {{ flashMessage.content }}
+    </div>
+{% endfor %}
+{% if publishers|length > 0 %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for publisher in publishers %}
+            <tr>
+                <td>{{ publisher.name|e }}</td>
+{#                <td><div class="text-right">{% if is_granted('ROLE_ADMIN') %} 
+					<a href="{{ url('/publisher/disconnect', {'idBook': book.id, 'id': publisher.id}) }}" class="btn btn-default" title="Delete">Usuñ to wydawnictwo dla tej ksi¹¿ki.</a>
+				{% endif %}</div></td> #}
+            </tr>
+        {% endfor %}
+	    </tbody>
+    </table>
+{#    {% if is_granted('ROLE_ADMIN') %}<a href="{{ url('/publishers/connect', {'idBook': publisher.id}) }}" class="btn btn-default" title="Add">Dodaj wydawnictwo dla tej ksi¹¿ki.</a>{% endif %} 
+{% else %} 
+        <p>Brak wydawnictwa. </p>
+		<a href="{{ url('/publishers/connect', {'idBook': id}) }}" class="btn btn-default" title="Add">Dodaj wydawnictwo dla tej ksi¹¿ki.</a>
+
+ {% endif %} #}
+<hr>
+<a href="{{ url('/books/view', {'id': book.id}) }}">< Powrót</a>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<h2>
+    Jak oceniasz ksi¹¿kê ,,{{ book.title }}''?
+</h2>
+<hr>
+
+<form action="" method="post">
+    {{ form_widget(form) }}
+</form>
+<hr>	
+
+
+{% endblock %}

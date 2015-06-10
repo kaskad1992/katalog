@@ -1,0 +1,18 @@
+{% extends 'base.twig' %}
+ 
+{% block content %}
+    <h2>
+        Blokowanie użytkownika
+    </h2>
+	<hr>
+    <h4>Czy na pewno chcesz zablokować konto użytkownika: {{ user.login|e }}?</h4>
+	{#<p><strong>Imię i nazwisko: </strong>{{ users_data.name|e }} {{ users_data.surname|e }}</p>#}
+    <form action="{{ url('/users/delete', {'id': user.id}) }}" method="post">
+        {{ form_widget(form) }}
+    </form>
+    <p>
+        <a href="{{ url('/users/') }}" title="Lista użytkowników">
+            < Lista użytkowników
+        </a>
+    </p>
+{% endblock %}
